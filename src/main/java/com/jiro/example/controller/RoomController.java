@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,25 +18,26 @@ import com.jiro.example.service.RoomService;
 
 
 @RestController
-@RequestMapping("")
-public class HomeController {
+@RequestMapping("room")
+@CrossOrigin(origins="*")
+public class RoomController {
 	@Autowired
 	RoomService roomService;
 	
 
 	HttpHeaders h = new HttpHeaders();
-	public HomeController() {
+	public RoomController() {
 
 		h.set("Content-Type","application/json");
 	}
-	@GetMapping("/all-rooms")
+	@GetMapping("/")
 	public ResponseEntity<List<Room>> getAllRooms() {
 		
 		return new ResponseEntity<List<Room>>(roomService.getAllRooms(),h,HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("/new")
+	@PostMapping("/")
 	public ResponseEntity<Room> createRoom(@RequestBody RoomDTO roomDTO){
 		Room room = roomService.addRoom(roomDTO);
 		ResponseEntity<Room> res;

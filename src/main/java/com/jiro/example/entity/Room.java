@@ -1,12 +1,13 @@
 package com.jiro.example.entity;
 
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,35 +25,17 @@ public class Room {
 	@Column
 	Long id;
 	
-	@Column(value = "room_no")
+	@Column(name = "room_no")
 	String room_no;
-	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRoom_no() {
-		return room_no;
-	}
-
-	public void setRoom_no(String room_no) {
-		this.room_no = room_no;
-	}
-
-	public RoomType getRoomType() {
-		return roomType;
-	}
-
-	public void setRoomType(RoomType roomType) {
-		this.roomType = roomType;
-	}
-
-	@ManyToOne(targetEntity = RoomType.class)
+	@JoinColumn(name = "room_type_id",nullable = false,updatable = true,insertable = true,unique = false)
+	@ManyToOne(targetEntity = RoomType.class,cascade = CascadeType.ALL)
 	RoomType roomType;
+
+
+	@JoinColumn(name="room_status_id",nullable = false,updatable = true,insertable = true,unique = false)
+	@ManyToOne(targetEntity = RoomStatus.class,cascade = CascadeType.ALL)
+	RoomStatus roomStatus;
 	
 
 }

@@ -1,18 +1,12 @@
 package com.jiro.example.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class RoomDTO {
 	String roomNumber;
 	Long roomTypeId;
-	public String getRoomNumber() {
-		return roomNumber;
-	}
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
-	public Long getRoomTypeId() {
-		return roomTypeId;
-	}
-	public void setRoomTypeId(Long roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
+	Long roomStatusId;
 }

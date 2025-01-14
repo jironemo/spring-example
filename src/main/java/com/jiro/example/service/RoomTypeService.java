@@ -16,4 +16,8 @@ public class RoomTypeService {
 	public Optional<RoomType> getRoomTypeById(Long roomTypeId) {
 		return roomTypeRepo.findById(roomTypeId);
 	}
+
+	public RoomType addRoomType(RoomType roomType) {
+		return roomTypeRepo.save(roomType);
+	}
 }
